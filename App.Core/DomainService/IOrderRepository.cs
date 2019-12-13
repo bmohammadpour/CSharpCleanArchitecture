@@ -5,19 +5,19 @@ using System.Text;
 
 namespace App.Core.DomainService
 {
-    public interface ICustomerRepository
+    public interface IOrderRepository
     {
         // Create Data --> POST
-        Customer Create(Customer customer);
+        Order Create(Order customer);
 
         // Read Data --> GET
-        Customer ReadById(int id);
-        IEnumerable<Customer> ReadAll();
+        Order ReadById(int id);
+        IEnumerable<Order> ReadAll();
 
         // Update Data --> PUT
-        Customer Update(Customer customer);
+        Order Update(Order order);
 
         // Delete Data --> DELETE
-        Customer Delete(int id);
+        Order Delete(int id);
     }
 }

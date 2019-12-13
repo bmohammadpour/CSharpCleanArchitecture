@@ -16,6 +16,8 @@ namespace App.Core.ApplicationService
         //Read
         Customer FindCustomerById(int id);
 
+        Customer FindCustomerByIdIncludeOrders(int id);
+
         List<Customer> GetAllCustomers();
 
         List<Customer> GetAllByFirstName(string name);

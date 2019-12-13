@@ -11,9 +11,11 @@ namespace App.Core.ApplicationService.Services
     {
         //Constructor Dependency Injection
         private readonly ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository)
+        private readonly IOrderRepository _orderRepository;
+        public CustomerService(ICustomerRepository customerRepository, IOrderRepository orderRepository)
         {
             _customerRepository = customerRepository;
+            _orderRepository = orderRepository;
         }
 
         public Customer NewCustomer(string firstName, string lastName, string address)
@@ -38,6 +40,16 @@ namespace App.Core.ApplicationService.Services
             return _customerRepository.ReadById(id);
         }
 
+        public Customer FindCustomerByIdIncludeOrders(int id)
+        {
+            var customer = _customerRepository.ReadById(id);
+            customer.Orders = _orderRepository.ReadAll()
+                .Where(order => order.Customer.Id == customer.Id)
+                .ToList();
+
+            return customer;
+        }
+
         public List<Customer> GetAllCustomers()
         {
             return _customerRepository.ReadAll().ToList();
@@ -55,13 +67,7 @@ namespace App.Core.ApplicationService.Services
 
         public Customer UpdateCustomer(Customer customer)
         {
-            var customerForUpdate = FindCustomerById(customer.Id);
-
-            customerForUpdate.FirstName = customer.FirstName;
-            customerForUpdate.LastName = customer.LastName;
-            customerForUpdate.Address = customer.Address;
-
-            return customerForUpdate;
+           return _customerRepository.Update(customer);
         }
 
         public Customer DeleteCustomer(int id)

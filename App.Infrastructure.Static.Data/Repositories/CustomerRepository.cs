@@ -3,37 +3,63 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using App.Core.Entity;
+using System.Linq;
 
 namespace App.Infrastructure.Static.Data.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        // Our Fake DB
-        static int id = 1;
-        private List<Customer> _customers = new List<Customer>();
+        // Our Fake Data
+        public CustomerRepository()
+        {
+            if (FakeDB.Customers.Count >= 1) return;
+            var cust1 = new Customer()
+            {
+                Id = FakeDB.Id++,
+                FirstName = "Ronika",
+                LastName = "Mohammadpour",
+                Address = "AmrollahiStreet 5"
+            };
+            FakeDB.Customers.Add(cust1);
+
+            var cust2 = new Customer()
+            {
+                Id = FakeDB.Id++,
+                FirstName = "Romina",
+                LastName = "Mohammadpour",
+                Address = "AmrollahiStreet 5"
+            };
+            FakeDB.Customers.Add(cust2);
+        }
 
         public Customer Create(Customer customer)
         {
-            customer.Id = id++;
-            _customers.Add(customer);
+            customer.Id = FakeDB.Id++;
+            FakeDB.Customers.Add(customer);
             return customer;
         }
 
         public IEnumerable<Customer> ReadAll()
         {
-            return _customers;
+            return FakeDB.Customers;
         }
 
         public Customer ReadById(int id)
         {
-            foreach (var customer in _customers)
-            {
-                if (customer.Id == id)
-                {
-                    return customer;
-                }
-            }
-            return null;
+            #region Old Code
+
+                //foreach (var customer in FakeDB.Customers)
+                //{
+                //    if (customer.Id == id)
+                //    {
+                //        return customer;
+                //    }
+                //}
+                //return null;
+
+            #endregion
+
+            return FakeDB.Customers.FirstOrDefault(c => c.Id == id);
         }
 
         // Remove later when we use UOW
@@ -55,7 +81,7 @@ namespace App.Infrastructure.Static.Data.Repositories
             var customerFound = this.ReadById(id);
             if (customerFound != null)
             {
-                _customers.Remove(customerFound);
+                FakeDB.Customers.Remove(customerFound);
                 return customerFound;
             }
             return null;
