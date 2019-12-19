@@ -14,6 +14,7 @@ namespace RestApiApp.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;
+
         public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
@@ -21,9 +22,18 @@ namespace RestApiApp.Controllers
 
         // GET api/Orders
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> Get()
+        public ActionResult<IEnumerable<Order>> Get([FromQuery] Filter filter)
         {
-            return Ok(_orderService.GetAllOrders());
+            try
+            {
+                return Ok(_orderService.GetFilteredOrders(filter));
+                //return Ok(_orderService.GetAllOrders());
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
         }
 
         // GET api/Orders/5
@@ -32,7 +42,7 @@ namespace RestApiApp.Controllers
         {
             if (id < 1) return BadRequest("Id must be greater than 0.");
 
-            return _orderService.FindOrderById(id);
+            return Ok(_orderService.FindOrderById(id));
         }
 
         // POST api/Orders

@@ -75,5 +75,15 @@ namespace App.Infrastructure.Static.Data.Repositories
             }
             return null;
         }
+
+        public IEnumerable<Order> ReadAll(Filter filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

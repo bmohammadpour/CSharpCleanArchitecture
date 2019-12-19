@@ -18,6 +18,8 @@ namespace App.Core.ApplicationService
 
         List<Order> GetAllOrders();
 
+        List<Order> GetFilteredOrders(Filter filter);
+
         //Update
         Order UpdateOrder(Order order);
 

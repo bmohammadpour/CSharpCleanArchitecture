@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F512D1BE-B516-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infrastructure.Static.Data", "App.Infrastructure.Static.Data\App.Infrastructure.Static.Data.csproj", "{8DFCCC6D-838A-402D-AECC-6EED6E9D8C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiApp", "RestApiApp\RestApiApp.csproj", "{89696E63-62C1-4F0B-B10A-2A616BE7A356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiApp", "RestApiApp\RestApiApp.csproj", "{89696E63-62C1-4F0B-B10A-2A616BE7A356}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure.Data", "App.Infrastructure.Data\App.Infrastructure.Data.csproj", "{4EA90477-3E04-4108-8949-CCF2E267A13C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{89696E63-62C1-4F0B-B10A-2A616BE7A356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89696E63-62C1-4F0B-B10A-2A616BE7A356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89696E63-62C1-4F0B-B10A-2A616BE7A356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA90477-3E04-4108-8949-CCF2E267A13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA90477-3E04-4108-8949-CCF2E267A13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA90477-3E04-4108-8949-CCF2E267A13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA90477-3E04-4108-8949-CCF2E267A13C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{D35C0470-4870-4762-AA2D-08EB3FE7BC24} = {31D06361-133E-4BDE-8F50-035DDD20D655}
 		{8DFCCC6D-838A-402D-AECC-6EED6E9D8C34} = {9E278B13-4B92-4FF8-9181-40E3ED108D2C}
 		{89696E63-62C1-4F0B-B10A-2A616BE7A356} = {F512D1BE-B516-4723-8C5E-C85907F4E7F0}
+		{4EA90477-3E04-4108-8949-CCF2E267A13C} = {9E278B13-4B92-4FF8-9181-40E3ED108D2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1925490-D0CE-4E74-8056-E94092BA7785}

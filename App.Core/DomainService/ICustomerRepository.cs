@@ -12,6 +12,9 @@ namespace App.Core.DomainService
 
         // Read Data --> GET
         Customer ReadById(int id);
+
+        Customer ReadByIdIncludeOrders(int id);
+
         IEnumerable<Customer> ReadAll();
 
         // Update Data --> PUT

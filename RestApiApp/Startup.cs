@@ -5,15 +5,19 @@ using System.Threading.Tasks;
 using App.Core.ApplicationService;
 using App.Core.ApplicationService.Services;
 using App.Core.DomainService;
-using App.Infrastructure.Static.Data.Repositories;
+using App.Core.Entity;
+using App.Infrastructure.Data;
+using App.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace RestApiApp
 {
@@ -29,11 +33,24 @@ namespace RestApiApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*services.AddDbContext<CleanArchContext>(
+                option => option.UseInMemoryDatabase("ThbDB")
+                );*/
+
+            services.AddDbContext<CleanArchContext>(
+                option => option.UseSqlite("Data Source = App.db")
+                );
+
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -44,6 +61,12 @@ namespace RestApiApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<CleanArchContext>();
+                    DBInitializer.SeedDB(ctx);
+                }
             }
             else
             {

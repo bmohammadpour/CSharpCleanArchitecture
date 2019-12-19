@@ -42,10 +42,7 @@ namespace App.Core.ApplicationService.Services
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            var customer = _customerRepository.ReadById(id);
-            customer.Orders = _orderRepository.ReadAll()
-                .Where(order => order.Customer.Id == customer.Id)
-                .ToList();
+            var customer = _customerRepository.ReadByIdIncludeOrders(id);
 
             return customer;
         }

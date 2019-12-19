@@ -12,12 +12,16 @@ namespace App.Core.DomainService
 
         // Read Data --> GET
         Order ReadById(int id);
-        IEnumerable<Order> ReadAll();
+
+        IEnumerable<Order> ReadAll(Filter filter = null);
+
+        int Count();
 
         // Update Data --> PUT
         Order Update(Order order);
 
         // Delete Data --> DELETE
         Order Delete(int id);
+        
     }
 }

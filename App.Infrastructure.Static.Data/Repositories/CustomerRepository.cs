@@ -86,5 +86,10 @@ namespace App.Infrastructure.Static.Data.Repositories
             }
             return null;
         }
+
+        public Customer ReadByIdIncludeOrders(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
